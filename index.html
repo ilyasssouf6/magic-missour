@@ -3,159 +3,218 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Magic de Missour</title>
+<title>Magic Missour</title>
 
 <style>
-body {margin:0; font-family:Arial; background:#111; color:#fff;}
-.hero {background:#000; text-align:center; padding:50px;}
-.hero img {width:80%; max-width:300px; animation:fade 2s;}
+body{margin:0;font-family:Arial;background:#111;color:#fff;text-align:center}
 
-@keyframes fade {from{opacity:0;} to{opacity:1;}}
+/* HEADER */
+.header{background:#000;padding:20px}
+.header img{width:120px}
 
-.products {
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:10px;
-padding:10px;
-}
+/* OFFER */
+#offer{background:red;padding:10px;font-weight:bold}
 
-.product {
+/* PRODUCTS */
+.products{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px}
+.product{
 background:#1c1c1c;
 padding:10px;
 border-radius:10px;
+cursor:pointer;
 transition:0.3s;
 }
+.product:hover{transform:scale(1.05)}
+.product img{width:100%;border-radius:10px}
 
-.product:hover {transform:scale(1.05);}
+/* POPUP */
+.popup{
+position:fixed;
+top:0;left:0;
+width:100%;height:100%;
+background:rgba(0,0,0,0.9);
+display:none;
+justify-content:center;
+align-items:center;
+}
 
-.product img {
+.popup-content{
+background:#222;
+padding:20px;
+border-radius:10px;
+width:90%;
+max-width:320px;
+}
+
+button{
+background:gold;
+border:none;
+padding:12px;
 width:100%;
+margin-top:10px;
+border-radius:5px;
+font-size:16px;
+}
+
+input{
+width:90%;
+padding:10px;
+margin:5px;
+border:none;
+border-radius:5px;
+}
+
+/* REVIEWS */
+.review{
+background:#1c1c1c;
+margin:10px;
+padding:10px;
 border-radius:10px;
 }
 
-.price {color:gold; font-weight:bold;}
-
-button {
-background:gold;
-border:none;
-padding:10px;
-width:100%;
-margin-top:5px;
-border-radius:5px;
-}
-
-form {padding:15px;}
-
-input {
-width:100%;
-padding:10px;
-margin:5px 0;
-border:none;
-border-radius:5px;
-}
-
-.whatsapp {
+/* WHATSAPP */
+.whatsapp{
 position:fixed;
 bottom:20px;
 right:20px;
 background:#25D366;
+color:#fff;
 padding:15px;
 border-radius:50%;
-color:#fff;
 font-size:20px;
 }
 
-.reviews {padding:10px;}
-.review {
-background:#1c1c1c;
+/* NOTIF */
+#notif{
+position:fixed;
+bottom:80px;
+left:10px;
+background:#000;
 padding:10px;
-margin:10px 0;
 border-radius:10px;
+font-size:12px;
 }
 </style>
-</head>
 
+</head>
 <body>
 
-<!-- LOGO -->
-<div class="hero">
+<!-- HEADER -->
+<div class="header">
 <img src="https://i.ibb.co/TDhDNWj1/DB198738-85-E1-4-BF4-A938-9-E03-E8-FF6714.png">
+<h2>Magic Missour</h2>
+<p>🔥 أفضل العطور بأثمنة خاصة 🔥</p>
 </div>
+
+<!-- OFFER -->
+<div id="offer">
+⏳ عرض محدود: <span id="timer"></span>
+</div>
+
+<p>🚚 توصيل + الدفع عند الاستلام</p>
+<p>✔ ضمان الجودة ✔ إرجاع ممكن</p>
 
 <!-- PRODUCTS -->
 <div class="products">
 
-<div class="product">
+<div class="product" onclick="openProduct('Magie Noir','عطر رجالي فاخر 🔥','https://i.ibb.co/bR712KX4/IMG-5067.jpg')">
 <img src="https://i.ibb.co/bR712KX4/IMG-5067.jpg">
-<h3>Magie Rose</h3>
-<p>عطرنيسائي فاخر، يدوم طويلاً 🔥</p>
-<p class="price">50 درهم</p>
-<button onclick="order('Magie Noir')">اطلب الآن</button>
+<p>⭐⭐⭐⭐⭐</p>
+<p><del>100 درهم</del> <span style="color:gold">50 درهم</span></p>
 </div>
 
-<div class="product">
+<div class="product" onclick="openProduct('Magie Rose','عطر نسائي ناعم 🌸','https://i.ibb.co/BVdhDQSq/IMG-5066.jpg')">
 <img src="https://i.ibb.co/BVdhDQSq/IMG-5066.jpg">
-<h3>Magie Noir</h3>
-<p>عطر رجالي ناعم ومنعش 🌸</p>
-<p class="price">50 درهم</p>
-<button onclick="order('Magie Rose')">اطلب الآن</button>
+<p>⭐⭐⭐⭐⭐</p>
+<p><del>100 درهم</del> <span style="color:gold">50 درهم</span></p>
 </div>
 
-<div class="product">
+<div class="product" onclick="openProduct('Elixir 1','عطر شرقي فاخر ✨','https://i.ibb.co/4ZM8FDL6/IMG-5053.jpg')">
 <img src="https://i.ibb.co/4ZM8FDL6/IMG-5053.jpg">
-<h3>Elixir Al-Quds</h3>
-<p>عطر شرقي فاخر وجذاب ✨</p>
-<p class="price">50 درهم</p>
-<button onclick="order('Elixir Al-Quds')">اطلب الآن</button>
+<p>⭐⭐⭐⭐⭐</p>
+<p><del>100 درهم</del> <span style="color:gold">50 درهم</span></p>
 </div>
 
-<div class="product">
+<div class="product" onclick="openProduct('Elixir 2','رائحة فخمة 💎','https://i.ibb.co/cKHL3RPh/IMG-5052.jpg')">
 <img src="https://i.ibb.co/cKHL3RPh/IMG-5052.jpg">
-<h3>Elixir Luxury</h3>
-<p>رائحة فخمة تناسب جميع الأوقات 💎</p>
-<p class="price">50 درهم</p>
-<button onclick="order('Elixir Luxury')">اطلب الآن</button>
+<p>⭐⭐⭐⭐⭐</p>
+<p><del>100 درهم</del> <span style="color:gold">50 درهم</span></p>
 </div>
 
 </div>
 
-<!-- ORDER FORM -->
-<form onsubmit="sendOrder(event)">
-<h3>📦 طلبك</h3>
-<input type="text" id="name" placeholder="الاسم" required>
-<input type="text" id="phone" placeholder="الهاتف" required>
-<input type="text" id="city" placeholder="المدينة" required>
-<input type="hidden" id="product">
-<button type="submit">تأكيد الطلب</button>
-</form>
+<!-- POPUP -->
+<div class="popup" id="popup">
+<div class="popup-content">
+
+<img id="pimg" style="width:100%">
+<h3 id="pname"></h3>
+<p id="pdesc"></p>
+
+<input type="number" id="qty" value="1" min="1">
+<input type="text" id="name" placeholder="الاسم">
+<input type="text" id="city" placeholder="المدينة">
+
+<button onclick="buy()">🛒 اطلب الآن</button>
+<button onclick="closePopup()">إغلاق</button>
+
+</div>
+</div>
 
 <!-- REVIEWS -->
-<div class="reviews">
 <h3>⭐ آراء الزبناء</h3>
-<div class="review">منتج رائع جداً 😍</div>
-<div class="review">رائحة قوية وتدوم 🔥</div>
-<div class="review">غادي نعاود نطلب 👍</div>
-</div>
+<div class="review">منتج رائع 🔥</div>
+<div class="review">رائحة تدوم 😍</div>
+<div class="review">سريع في التوصيل 👍</div>
+
+<!-- NOTIF -->
+<div id="notif">🔥 شخص اشترى الآن!</div>
 
 <!-- WHATSAPP -->
 <a class="whatsapp" href="https://wa.me/212XXXXXXXXX">💬</a>
 
 <script>
-function order(product){
-document.getElementById("product").value = product;
-alert("تم اختيار: " + product);
+
+let currentProduct="";
+
+function openProduct(name,desc,img){
+document.getElementById("popup").style.display="flex";
+document.getElementById("pname").innerText=name;
+document.getElementById("pdesc").innerText=desc;
+document.getElementById("pimg").src=img;
+currentProduct=name;
 }
 
-function sendOrder(e){
-e.preventDefault();
-let name = document.getElementById("name").value;
-let phone = document.getElementById("phone").value;
-let city = document.getElementById("city").value;
-let product = document.getElementById("product").value;
-
-let msg = `طلب:%0A${name}%0A${phone}%0A${city}%0A${product}`;
-window.open("https://wa.me/212XXXXXXXXX?text=" + msg);
+function closePopup(){
+document.getElementById("popup").style.display="none";
 }
+
+function buy(){
+let qty=document.getElementById("qty").value;
+let name=document.getElementById("name").value;
+let city=document.getElementById("city").value;
+
+let msg=`طلب:%0A${currentProduct}%0Aالكمية:${qty}%0Aالاسم:${name}%0Aالمدينة:${city}`;
+window.open("https://wa.me/212XXXXXXXXX?text="+msg);
+}
+
+// TIMER
+let time=600;
+setInterval(()=>{
+let m=Math.floor(time/60);
+let s=time%60;
+document.getElementById("timer").innerText=m+":"+(s<10?"0"+s:s);
+time--;
+if(time<0){document.getElementById("offer").innerText="❌ انتهى العرض";}
+},1000);
+
+// NOTIFICATIONS
+let names=["محمد","سارة","يوسف","أحمد","فاطمة"];
+setInterval(()=>{
+document.getElementById("notif").innerText=
+"🔥 "+names[Math.floor(Math.random()*names.length)]+" اشترى الآن!";
+},3000);
+
 </script>
 
 </body>
