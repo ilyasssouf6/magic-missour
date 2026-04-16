@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Magic de Missour</title>
+
+<style>
+body {margin:0; font-family:Arial; background:#111; color:#fff;}
+.hero {background:#000; text-align:center; padding:50px;}
+.hero img {width:80%; max-width:300px; animation:fade 2s;}
+
+@keyframes fade {from{opacity:0;} to{opacity:1;}}
+
+.products {
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+padding:10px;
+}
+
+.product {
+background:#1c1c1c;
+padding:10px;
+border-radius:10px;
+transition:0.3s;
+}
+
+.product:hover {transform:scale(1.05);}
+
+.product img {
+width:100%;
+border-radius:10px;
+}
+
+.price {color:gold; font-weight:bold;}
+
+button {
+background:gold;
+border:none;
+padding:10px;
+width:100%;
+margin-top:5px;
+border-radius:5px;
+}
+
+form {padding:15px;}
+
+input {
+width:100%;
+padding:10px;
+margin:5px 0;
+border:none;
+border-radius:5px;
+}
+
+.whatsapp {
+position:fixed;
+bottom:20px;
+right:20px;
+background:#25D366;
+padding:15px;
+border-radius:50%;
+color:#fff;
+font-size:20px;
+}
+
+.reviews {padding:10px;}
+.review {
+background:#1c1c1c;
+padding:10px;
+margin:10px 0;
+border-radius:10px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOGO -->
+<div class="hero">
+<img src="https://i.ibb.co/TDhDNWj1/DB198738-85-E1-4-BF4-A938-9-E03-E8-FF6714.png">
+</div>
+
+<!-- PRODUCTS -->
+<div class="products">
+
+<div class="product">
+<img src="https://i.ibb.co/bR712KX4/IMG-5067.jpg">
+<h3>Magie Rose</h3>
+<p>عطرنيسائي فاخر، يدوم طويلاً 🔥</p>
+<p class="price">50 درهم</p>
+<button onclick="order('Magie Noir')">اطلب الآن</button>
+</div>
+
+<div class="product">
+<img src="https://i.ibb.co/BVdhDQSq/IMG-5066.jpg">
+<h3>Magie Noir</h3>
+<p>عطر رجالي ناعم ومنعش 🌸</p>
+<p class="price">50 درهم</p>
+<button onclick="order('Magie Rose')">اطلب الآن</button>
+</div>
+
+<div class="product">
+<img src="https://i.ibb.co/4ZM8FDL6/IMG-5053.jpg">
+<h3>Elixir Al-Quds</h3>
+<p>عطر شرقي فاخر وجذاب ✨</p>
+<p class="price">50 درهم</p>
+<button onclick="order('Elixir Al-Quds')">اطلب الآن</button>
+</div>
+
+<div class="product">
+<img src="https://i.ibb.co/cKHL3RPh/IMG-5052.jpg">
+<h3>Elixir Luxury</h3>
+<p>رائحة فخمة تناسب جميع الأوقات 💎</p>
+<p class="price">50 درهم</p>
+<button onclick="order('Elixir Luxury')">اطلب الآن</button>
+</div>
+
+</div>
+
+<!-- ORDER FORM -->
+<form onsubmit="sendOrder(event)">
+<h3>📦 طلبك</h3>
+<input type="text" id="name" placeholder="الاسم" required>
+<input type="text" id="phone" placeholder="الهاتف" required>
+<input type="text" id="city" placeholder="المدينة" required>
+<input type="hidden" id="product">
+<button type="submit">تأكيد الطلب</button>
+</form>
+
+<!-- REVIEWS -->
+<div class="reviews">
+<h3>⭐ آراء الزبناء</h3>
+<div class="review">منتج رائع جداً 😍</div>
+<div class="review">رائحة قوية وتدوم 🔥</div>
+<div class="review">غادي نعاود نطلب 👍</div>
+</div>
+
+<!-- WHATSAPP -->
+<a class="whatsapp" href="https://wa.me/212XXXXXXXXX">💬</a>
+
+<script>
+function order(product){
+document.getElementById("product").value = product;
+alert("تم اختيار: " + product);
+}
+
+function sendOrder(e){
+e.preventDefault();
+let name = document.getElementById("name").value;
+let phone = document.getElementById("phone").value;
+let city = document.getElementById("city").value;
+let product = document.getElementById("product").value;
+
+let msg = `طلب:%0A${name}%0A${phone}%0A${city}%0A${product}`;
+window.open("https://wa.me/212XXXXXXXXX?text=" + msg);
+}
+</script>
+
+</body>
+</html>
