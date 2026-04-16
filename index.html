@@ -24,7 +24,10 @@ border-radius:10px;
 cursor:pointer;
 transition:0.3s;
 }
-.product:hover{transform:scale(1.05)}
+.product:hover{
+transform:scale(1.08);
+box-shadow:0 0 15px gold;
+}
 .product img{width:100%;border-radius:10px}
 
 /* POPUP */
@@ -36,6 +39,7 @@ background:rgba(0,0,0,0.9);
 display:none;
 justify-content:center;
 align-items:center;
+z-index:5;
 }
 
 .popup-content{
@@ -94,10 +98,37 @@ padding:10px;
 border-radius:10px;
 font-size:12px;
 }
+
+/* SMOKE */
+.smoke{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+pointer-events:none;
+overflow:hidden;
+z-index:1;
+}
+.smoke span{
+position:absolute;
+bottom:-100px;
+background:rgba(255,255,255,0.08);
+border-radius:50%;
+animation:rise 10s linear infinite;
+}
+@keyframes rise{
+0%{transform:translateY(0) scale(0.5);opacity:0}
+50%{opacity:0.5}
+100%{transform:translateY(-100vh) scale(1.5);opacity:0}
+}
 </style>
 
 </head>
 <body>
+
+<!-- SMOKE -->
+<div class="smoke" id="smoke"></div>
 
 <!-- HEADER -->
 <div class="header">
@@ -107,9 +138,7 @@ font-size:12px;
 </div>
 
 <!-- OFFER -->
-<div id="offer">
-⏳ عرض محدود: <span id="timer"></span>
-</div>
+<div id="offer">⏳ عرض محدود: <span id="timer"></span></div>
 
 <p>🚚 توصيل + الدفع عند الاستلام</p>
 <p>✔ ضمان الجودة ✔ إرجاع ممكن</p>
@@ -173,6 +202,11 @@ font-size:12px;
 <!-- WHATSAPP -->
 <a class="whatsapp" href="https://wa.me/212XXXXXXXXX">💬</a>
 
+<!-- BUY FIXED -->
+<div style="position:fixed;bottom:0;width:100%;background:#000;padding:10px">
+<button onclick="buy()">🛒 اطلب الآن</button>
+</div>
+
 <script>
 
 let currentProduct="";
@@ -194,6 +228,11 @@ let qty=document.getElementById("qty").value;
 let name=document.getElementById("name").value;
 let city=document.getElementById("city").value;
 
+if(name=="" || city==""){
+alert("⚠️ دخل الاسم والمدينة");
+return;
+}
+
 let msg=`طلب:%0A${currentProduct}%0Aالكمية:${qty}%0Aالاسم:${name}%0Aالمدينة:${city}`;
 window.open("https://wa.me/212XXXXXXXXX?text="+msg);
 }
@@ -208,12 +247,27 @@ time--;
 if(time<0){document.getElementById("offer").innerText="❌ انتهى العرض";}
 },1000);
 
-// NOTIFICATIONS
+// NOTIF
 let names=["محمد","سارة","يوسف","أحمد","فاطمة"];
 setInterval(()=>{
 document.getElementById("notif").innerText=
 "🔥 "+names[Math.floor(Math.random()*names.length)]+" اشترى الآن!";
 },3000);
+
+// SMOKE
+setInterval(()=>{
+let smoke=document.getElementById("smoke");
+let span=document.createElement("span");
+
+let size=Math.random()*60+20;
+span.style.width=size+"px";
+span.style.height=size+"px";
+span.style.left=Math.random()*100+"%";
+
+smoke.appendChild(span);
+
+setTimeout(()=>{span.remove();},10000);
+},300);
 
 </script>
 
